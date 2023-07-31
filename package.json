@@ -1,18 +1,19 @@
 {
   "name": "mcap-cli-vscode",
   "displayName": "mcap-cli (unofficial)",
-  "description": "Extends the MCAP CLI for use in VSCode",
+  "description": "Eases the use of the MCAP cli in VSCode",
   "version": "0.0.1",
   "author": {
     "name": "Tiwaloluwa Ojo"
   },
+  "publisher": "tiwaojo",
   "galleryBanner": {
     "color": "#4a279b",
     "theme": "dark"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/vscode-wordcount.git"
+    "url": "https://github.com/tiwaojo/foxglove-mcap.git"
   },
   "icon": "src/assets/images/mcap.png",
   "engines": {
