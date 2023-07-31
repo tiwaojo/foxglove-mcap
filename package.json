@@ -6,6 +6,7 @@
   "author": {
     "name": "Tiwaloluwa Ojo"
   },
+  "license":"MIT",
   "publisher": "tiwaojo",
   "galleryBanner": {
     "color": "#4a279b",
@@ -15,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/tiwaojo/foxglove-mcap.git"
   },
-  "icon": "src/assets/images/mcap.png",
+  "icon": "assets/images/mcap.png",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -69,8 +70,8 @@
         "command": "mcap-cli-vscode.add",
         "title": "MCAP: add",
         "icon": {
-          "light": "src/assets/images/mcap-light.svg",
-          "dark": "src/assets/images/mcap-dark.svg"
+          "light": "assets/images/mcap-light.svg",
+          "dark": "assets/images/mcap-dark.svg"
         },
         "shortTitle": "Add records to an existing MCAP file"
       },
@@ -139,11 +140,12 @@
   "scripts": {
     "compile": "tsc -p ./",
     "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "deploy": "vsce publish",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
     "watch": "tsc -watch -p ./",
-    "pretest": "pnpm run compile && pnpm run lint",
+    "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
   },

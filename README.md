@@ -4,7 +4,7 @@
 
 Extends the MCAP CLI for use in VSCode. Visit the [MCAP](https://mcap.dev/) site to learn more.
 
-![command prompt](src/assets/images/command-prompt.png)
+![command prompt](assets/images/command-prompt.png)
 
 ## Prerequisites
 - MCAP Binary
@@ -27,7 +27,7 @@ A command pallet of commands to run in addition to adding to the `explorer` cont
 
 ### Context Menus
 
-![context menu](src/assets/images/context-menu.png)
+![context menu](assets/images/context-menu.png)
 - [x] `MCAP: Add` - Add records to an existing MCAP file
 - [x] `MCAP: Cat` - Cat the messages in an MCAP file to stdout
 - [x] `MCAP: List` - List records of an MCAP file
