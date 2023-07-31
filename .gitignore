@@ -1,4 +1,6 @@
 out
+!out/main.js
+!out/extension.js
 dist
 node_modules
 .vscode-test/
