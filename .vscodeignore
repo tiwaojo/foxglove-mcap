@@ -2,13 +2,9 @@
 .vscode-test/**
 src/
 node_modules
-.gitignore
 .yarnrc
 vsc-extension-quickstart.md
 **/tsconfig.json
 **/.eslintrc.json
-out
-!out/main.js
-!out/extension.js
 mcap
 **/mcap
