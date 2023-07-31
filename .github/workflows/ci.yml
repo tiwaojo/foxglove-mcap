@@ -24,10 +24,8 @@ jobs:
       uses: actions/checkout@v3
     - name: Install Node.js
       uses: actions/setup-node@v3
-    - run: npm install
+    - run: npm install && npm run test
       if: runner.os == 'Linux'
-    - run: npm run test
-      if: runner.os != 'Linux'
 
   release-please:
     runs-on: ubuntu-latest
