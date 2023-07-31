@@ -1,0 +1,164 @@
+{
+  "name": "mcap-cli-vscode",
+  "displayName": "mcap-cli (unofficial)",
+  "description": "Extends the MCAP CLI for use in VSCode",
+  "version": "0.0.1",
+  "author": {
+    "name": "Tiwaloluwa Ojo"
+  },
+  "galleryBanner": {
+    "color": "#4a279b",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/vscode-wordcount.git"
+  },
+  "icon": "src/assets/images/mcap.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/*.mcap",
+    "workspaceContains:**/mcap"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "MCAP",
+      "properties": {
+        "mcap.mcapPath": {
+          "type": "string",
+          "default": "/workspaces/foxglove-mcap/mcap",
+          "description": "Complete functions with their parameter signature.",
+          "scope": "resource"
+        },
+        "mcap.clearOutputBeforeCommand": {
+          "type": "boolean",
+          "default": false,
+          "description": "Clear output before executing next command",
+          "scope": "window"
+        }
+      }
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceExtname === '.mcap'",
+          "command": "mcap-cli-vscode.info",
+          "group": "2_workspace"
+        },
+        {
+          "when": "resourceExtname === '.mcap'",
+          "command": "mcap-cli-vscode.cat",
+          "group": "2_workspace"
+        },
+        {
+          "when": "resourceExtname === '.mcap'",
+          "command": "mcap-cli-vscode.list",
+          "group": "2_workspace"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "mcap-cli-vscode.add",
+        "title": "MCAP: add",
+        "icon": {
+          "light": "src/assets/images/mcap-light.svg",
+          "dark": "src/assets/images/mcap-dark.svg"
+        },
+        "shortTitle": "Add records to an existing MCAP file"
+      },
+      {
+        "command": "mcap-cli-vscode.cat",
+        "title": "MCAP: cat",
+        "shortTitle": "Cat the messages in an MCAP file to stdout"
+      },
+      {
+        "command": "mcap-cli-vscode.compress",
+        "title": "MCAP: compress",
+        "shortTitle": "Create a compressed copy of an MCAP file"
+      },
+      {
+        "command": "mcap-cli-vscode.convert",
+        "title": "MCAP: convert",
+        "shortTitle": "Convert a bag file to an MCAP file"
+      },
+      {
+        "command": "mcap-cli-vscode.decompress",
+        "title": "MCAP: decompress",
+        "shortTitle": "Create an uncompressed copy of an MCAP file"
+      },
+      {
+        "command": "mcap-cli-vscode.doctor",
+        "title": "MCAP: doctor",
+        "shortTitle": "Check an MCAP file structure"
+      },
+      {
+        "command": "mcap-cli-vscode.filter",
+        "title": "MCAP: filter",
+        "shortTitle": "Copy some filtered MCAP data to a new file"
+      },
+      {
+        "command": "mcap-cli-vscode.get",
+        "title": "MCAP: get",
+        "shortTitle": "Get a record from an MCAP file"
+      },
+      {
+        "command": "mcap-cli-vscode.help",
+        "title": "MCAP: help",
+        "shortTitle": "Help about any command"
+      },
+      {
+        "command": "mcap-cli-vscode.info",
+        "title": "MCAP: info",
+        "shortTitle": "Report statistics about an MCAP file"
+      },
+      {
+        "command": "mcap-cli-vscode.list",
+        "title": "MCAP: list",
+        "shortTitle": "List records of an MCAP file"
+      },
+      {
+        "command": "mcap-cli-vscode.merge",
+        "title": "MCAP: merge",
+        "shortTitle": "Merge a selection of MCAP files by record timestamp"
+      },
+      {
+        "command": "mcap-cli-vscode.recover",
+        "title": "MCAP: recover",
+        "shortTitle": "Recover data from a potentially corrupt MCAP file"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.2.5",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "@vscode/test-electron": "^2.3.2",
+    "@vscode/vsce": "^2.20.0",
+    "esbuild": "^0.18.17",
+    "eslint": "^8.41.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.3"
+  }
+}
