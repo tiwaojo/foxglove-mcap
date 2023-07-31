@@ -2,7 +2,7 @@
   "name": "mcap-cli-vscode",
   "displayName": "mcap-cli (unofficial)",
   "description": "Eases the use of the MCAP cli in VSCode",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": {
     "name": "Tiwaloluwa Ojo"
   },
