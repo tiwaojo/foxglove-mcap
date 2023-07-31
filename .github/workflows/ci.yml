@@ -24,7 +24,7 @@ jobs:
       with:
         version: 8
         run_install: |
-          - args: [--global, @vscode/vsce, prettier, typescript]
+          - args: [--global, prettier, typescript]
           - name: Get pnpm store directory
         shell: bash
         run: |
@@ -48,12 +48,4 @@ jobs:
       run: npm run deploy
       env:
         VSCE_PAT: ${{ secrets.VSCE_PAT }}
-
-  release-please:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: google-github-actions/release-please-action@v3
-        with:
-          release-type: node
-          package-name: release-please-action
     
