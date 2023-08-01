@@ -9,12 +9,11 @@ on:
     types:
     - created
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
-  build:
+  release:
+    permissions:
+      contents: write # to create release commit (google-github-actions/release-please-action)
+      pull-requests: write # to create release PR (google-github-actions/release-please-action)
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -35,36 +34,19 @@ jobs:
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
           echo store_path=${{ env.STORE_PATH }}
     - run: pnpm install && pnpm vsce package --no-dependencies && pnpm vsce publish -p ${{ secrets.VSCE_PAT }} --no-dependencies
-
-
-    # - uses: actions/cache@v3
-    #   name: Setup pnpm cache
-    #   with:
-    #     path: ${{ env.STORE_PATH }}
-    #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-pnpm-store-
-    # - run: pnpm install && pnpm run package
-    #   if: runner.os == 'Linux'
-
-  release-please:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - run: pnpm install && pnpm vsce package --no-dependencies && pnpm vsce publish -p ${{ secrets.VSCE_PAT }} --no-dependencies
-      - uses: google-github-actions/release-please-action@v3
-        with:
-          release-type: node
-          package-name: mcap-cli-vscode-${{ steps.release.outputs.tag_name }}
-      - name: Publish and Upload Release Artifact
-        # if: ${{ steps.release.outputs.release_created }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
-        run: |
-          pnpm i
-          ls -al
-          pnpm vsce package --no-dependencies
-          pnpm vsce publish -p ${{ secrets.VSCE_PAT }} --no-dependencies
-          echo tag_name: ${{ steps.release.outputs.tag_name }}
-          gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-${{ steps.release.outputs.tag_name }}.vsix
+    - uses: google-github-actions/release-please-action@v3
+      with:
+        release-type: node
+        package-name: mcap-cli-vscode-${{ steps.release.outputs.tag_name }}
+    - name: Publish and Upload Release Artifact
+      # if: ${{ steps.release.outputs.release_created }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      run: |
+        pnpm i
+        ls -al
+        pnpm vsce package --no-dependencies
+        pnpm vsce publish -p ${{ secrets.VSCE_PAT }} --no-dependencies
+        echo tag_name: ${{ steps.release.outputs.tag_name }}
+        gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-${{ steps.release.outputs.tag_name }}.vsix
