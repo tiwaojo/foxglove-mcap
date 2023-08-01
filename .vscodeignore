@@ -2,6 +2,8 @@
 .vscode-test/**
 src/
 node_modules
+out/
+!out/extension.js
 .yarnrc
 vsc-extension-quickstart.md
 **/tsconfig.json

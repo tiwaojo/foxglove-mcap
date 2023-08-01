@@ -140,12 +140,13 @@
   "scripts": {
     "compile": "tsc -p ./",
     "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "deploy": "vsce publish",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "deploy": "pnpm vsce publish --no-dependencies",
+    "package": "pnpm vsce package --no-dependencies",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
+    "pretest": "pnpm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
   },
