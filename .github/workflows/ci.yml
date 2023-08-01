@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - ci/*
   release:
     types:
     - created
@@ -35,7 +34,7 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
           echo store_path=${{ env.STORE_PATH }}
-          pnpm install && npx vsce publish -p ${{ secrets.VSCE_PAT }}
+          pnpm install && pnpm vsce package --no-dependencies && pnpm vsce publish -p ${{ secrets.VSCE_PAT }} --no-dependencies
 
 
     # - uses: actions/cache@v3
@@ -65,10 +64,7 @@ jobs:
         run: |
           pnpm i
           ls -al
-          npx vsce package 
-          npx vsce publish -p ${{ secrets.VSCE_PAT }}
+          pnpm vsce package --no-dependencies
+          pnpm vsce publish -p ${{ secrets.VSCE_PAT }} --no-dependencies
           echo tag_name: ${{ steps.release.outputs.tag_name }}
           gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-${{ steps.release.outputs.tag_name }}.vsix
-
-          
-    
