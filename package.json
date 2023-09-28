@@ -34,7 +34,7 @@
       "properties": {
         "mcap.mcapPath": {
           "type": "string",
-          "default": "/workspaces/foxglove-mcap/mcap",
+          "default": "mcap",
           "description": "Complete functions with their parameter signature.",
           "scope": "resource"
         },
