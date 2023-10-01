@@ -46,22 +46,93 @@
         }
       }
     },
+    "submenus": [
+      {
+        "id": "mcap.cli",
+        "label": "MCAP CLI",
+        "icon": {
+          "light": "assets/images/mcap-light.svg",
+          "dark": "assets/images/mcap-dark.svg"
+        }
+      }
+    ],
     "menus": {
       "explorer/context": [
         {
           "when": "resourceExtname === '.mcap'",
-          "command": "mcap-cli-vscode.info",
-          "group": "2_workspace"
+          "submenu": "mcap.cli",
+          "groups": [
+            {
+              "command": "mcap-cli-vscode.info",
+              "group": "2_main@1"
+            },
+            {
+              "command": "mcap-cli-vscode.cat",
+              "group": "2_main@1"
+            },
+            {
+              "command": "mcap-cli-vscode.list",
+              "group": "2_main@1"
+            },
+            {
+              "command": "mcap-cli-vscode.filter",
+              "group": "2_main@1"
+            }
+          ]
+        }
+      ],
+      "mcap.cli": [
+        {
+          "command": "mcap-cli-vscode.add",
+          "group": "2_main@1"
         },
         {
-          "when": "resourceExtname === '.mcap'",
           "command": "mcap-cli-vscode.cat",
-          "group": "2_workspace"
+          "group": "2_main@1"
         },
         {
-          "when": "resourceExtname === '.mcap'",
+          "command": "mcap-cli-vscode.compress",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.convert",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.decompress",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.doctor",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.filter",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.get",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.help",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.info",
+          "group": "2_main@1"
+        },
+        {
           "command": "mcap-cli-vscode.list",
-          "group": "2_workspace"
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.merge",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.recover",
+          "group": "2_main@1"
         }
       ]
     },

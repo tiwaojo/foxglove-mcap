@@ -28,6 +28,7 @@ A command pallet of commands to run in addition to adding to the `explorer` cont
 ### Context Menus
 
 ![context menu](assets/images/context-menu.png)
+<!-- https://github.com/microsoft/vscode-extension-samples/issues/873 -->
 - [x] `MCAP: Add` - Add records to an existing MCAP file
 - [x] `MCAP: Cat` - Cat the messages in an MCAP file to stdout
 - [x] `MCAP: List` - List records of an MCAP file
