@@ -1,11 +1,10 @@
 import * as vscode from "vscode";
-import {
-  commandSetup,
-  flagsInput,
-  runMCAPCommand,
-  selectMCAPFile,
-} from "../utils";
+import { commandSetup, selectMCAPFile } from "../utils";
 
+/**
+ * Registers the 'mcap-cli-vscode.get' command with VS Code, which allows users to get an attachment or metadata from an MCAP file.
+ * @param uri The URI of the file to get a record from, if specified through the explorers/context menu.
+ */
 export default vscode.commands.registerCommand(
   "mcap-cli-vscode.get",
   async (uri: vscode.Uri) => {
@@ -13,7 +12,7 @@ export default vscode.commands.registerCommand(
       uri && uri.fsPath !== "" ? uri.fsPath : ""
     );
     if (!filePath) {
-      vscode.window.showErrorMessage("No '.mcap' file selected or found.");
+      console.log("No '.mcap' file selected or found.");
       return;
     }
 
@@ -26,7 +25,5 @@ export default vscode.commands.registerCommand(
       [filePath],
       false
     );
-
-    vscode.window.showInformationMessage("Success from mcap-cli get");
   }
 );

@@ -10,7 +10,7 @@
       "version": "latest"
     },
     "ghcr.io/devcontainers/features/git": {},
-    "ghcr.io/tiwaojo/features/mcap-cli": {}
+    "ghcr.io/tiwaojo/features/mcap-cli": {"version": "v0.0.35"}
   },
   "workspaceFolder": "/home/node/${localWorkspaceFolderBasename}",
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/node/${localWorkspaceFolderBasename},type=bind",

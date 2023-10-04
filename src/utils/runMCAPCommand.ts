@@ -1,15 +1,17 @@
 import * as vscode from "vscode";
 
-const config = vscode.workspace.getConfiguration(); // get configuration
-// Prepares a terminal and executes the composed mcap command
+/**
+ * Runs an MCAP command in the terminal.
+ * @param mcapCommands An array of MCAP commands to run.
+ * @param files An array of file paths to include in the command.
+ * @param mcapFlags An array of flags to include in the command.
+ */
 export async function runMCAPCommand(
   mcapCommands: string[],
   files: string[],
   mcapFlags: string[]
-) {
-  const mcapClearOutputConf = vscode.workspace
-    .getConfiguration()
-    .get("mcap.clearOutputBeforeCommand");
+  ) {
+  const config = vscode.workspace.getConfiguration(); // get configurations
 
   const terminalName = "MCAP Output";
 
@@ -24,7 +26,7 @@ export async function runMCAPCommand(
   )} ${files.join(" ")} ${mcapFlags.join(" ")} `;
   console.log("MCAP COMMAND: ", mcapCommand);
 
-  if (mcapClearOutputConf) {
+  if (config.get("mcap.clearOutputBeforeCommand")) {
     await vscode.commands.executeCommand("workbench.action.terminal.clear");
   }
 

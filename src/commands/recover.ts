@@ -1,11 +1,13 @@
 import * as vscode from "vscode";
 import {
   commandSetup,
-  flagsInput,
-  runMCAPCommand,
   selectMCAPFile,
 } from "../utils";
 
+/**
+ * Registers the `mcap-cli-vscode.recover` command with VS Code, which allows the user to recover a previously saved MCAP file.
+ * @param uri The URI of the file to recover, if specified through the explorers/context menu.
+ */
 export default vscode.commands.registerCommand(
   "mcap-cli-vscode.recover",
   async (uri: vscode.Uri) => {
@@ -13,15 +15,10 @@ export default vscode.commands.registerCommand(
       uri && uri.fsPath !== "" ? uri.fsPath : ""
     );
     if (!filePath) {
-      vscode.window.showErrorMessage("No '.mcap' file selected or found.");
+      console.log("No '.mcap' file selected or found.");
       return;
     }
 
     await commandSetup("recover", [], [filePath], true);
-
-    // const mcapFlags = (await flagsInput()) ?? "";
-
-    // await runMCAPCommand(["filter"], [filePath], [mcapFlags]);
-    vscode.window.showInformationMessage("Success from mcap-cli recover");
   }
 );

@@ -1,6 +1,10 @@
 import * as vscode from "vscode";
 import { commandSetup, runMCAPCommand, selectMCAPFile } from "../utils";
 
+/**
+ * Registers the `mcap-cli-vscode.info` command, which allows the user to read statistics on an mcap file.
+ * @param uri The URI of the file to get info of, if specified through the explorers/context menu.
+ */
 export default vscode.commands.registerCommand(
   "mcap-cli-vscode.info",
   async (uri: vscode.Uri) => {
@@ -9,12 +13,10 @@ export default vscode.commands.registerCommand(
     );
 
     if (!filePath) {
-      vscode.window.showErrorMessage("No file selected or found.");
+      console.log("No file selected or found.");
       return;
     }
 
     await runMCAPCommand(["info"], [filePath], [""]);
-
-    vscode.window.showInformationMessage("Success from mcap-cli info");
   }
 );

@@ -13,17 +13,17 @@ import merge from "./merge";
 import recover from "./recover";
 
 export default [
-    addRecord,//{ command: "add", description: "Add a record to an MCAP file" },
-    cat, //{ command: "cat", description: "Print an MCAP file to stdout" },
-    compress, //{ command: "compress", description: "Compress an MCAP file" },
-    // convert, //{ command: "convert", description: "Convert an MCAP file" },
-    decompress, //{ command: "decompress", description: "Decompress an MCAP file" },
-    doctor, //{ command: "doctor", description: "Check an MCAP file for errors" },
-    get, //{ command: "get", description: "Get a record from an MCAP file" },
-    help, //{ command: "help", description: "Show help for a command" },
-    info, //{ command: "info", description: "Show information about an MCAP file" },
-    list, //{ command: "list", description: "List records in an MCAP file" },
-    merge, 
-    recover, //{ command: "recover", description: "Recover an MCAP file" },
-    filter,
+    addRecord,  // Add a record to an MCAP file
+    cat,        // Print an MCAP file to stdout
+    compress,   // Compress an MCAP file
+    convert,    // Convert an MCAP file
+    decompress, // Decompress an MCAP file
+    doctor,     // Check an MCAP file for errors
+    filter,     // Filter records in an MCAP file
+    get,        // Get a record from an MCAP file
+    help,       // Show help for a command
+    info,       // Show information about an MCAP file
+    list,       // List records in an MCAP file
+    merge,      // Merge MCAP files
+    recover,    // Recover an MCAP file from a corrupted file,
 ];

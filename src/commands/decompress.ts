@@ -1,11 +1,10 @@
 import * as vscode from "vscode";
-import {
-  commandSetup,
-  flagsInput,
-  runMCAPCommand,
-  selectMCAPFile,
-} from "../utils";
+import { commandSetup, selectMCAPFile } from "../utils";
 
+/**
+ * Registers the `mcap-cli-vscode.decompress` command that prompts the user to select an `.mcap` file to decompress.
+ * @param uri The URI of the mcap file to decompress, if specified through the explorers/context menu.
+ */
 export default vscode.commands.registerCommand(
   "mcap-cli-vscode.decompress",
   async (uri: vscode.Uri) => {
@@ -13,15 +12,10 @@ export default vscode.commands.registerCommand(
       uri && uri.fsPath !== "" ? uri.fsPath : ""
     );
     if (!filePath) {
-      vscode.window.showErrorMessage("No '.mcap' file selected or found.");
+      console.log("No '.mcap' file selected or found.");
       return;
     }
 
     await commandSetup("decompress", [], [filePath], true);
-
-    // const mcapFlags = (await flagsInput()) ?? "";
-
-    // await runMCAPCommand(["filter"], [filePath], [mcapFlags]);
-    vscode.window.showInformationMessage("Success from mcap-cli decompress");
   }
 );

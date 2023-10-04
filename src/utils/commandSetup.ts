@@ -1,9 +1,14 @@
-import * as vscode from "vscode";
 import { MCAPCommand } from "../types";
-import { runMCAPCommand, selectMCAPFile, flagsInput } from "../utils";
-import { subCmdInput } from "./inputs";
+import { runMCAPCommand, showInputBox } from "../utils";
+import { showQuickPick } from "./inputs";
 
-// Prepare commands
+/**
+ * Sets up and runs an MCAP command with the given sub-commands, file system paths, and output file flag.
+ * @param cmd - The main command to run.
+ * @param subCmds - An array of sub-commands to choose from.
+ * @param fsPath - An array of file system paths to use.
+ * @param outFile - A boolean indicating whether an output file is required.
+ */
 export async function commandSetup(
   cmd: string,
   subCmds: MCAPCommand[],
@@ -15,21 +20,19 @@ export async function commandSetup(
     description: e.description,
   }));
 
-  // If the command requires a sub-command, but no sub-commands are found, show an error message
-  // if (subCmdItems.length !== 0) {
-  const selectedSubCmd = await subCmdInput(subCmdItems, cmd);
+  // Allow the user to select a sub-command
+  const selectedSubCmd = await showQuickPick(subCmdItems, cmd);
 
   if (!selectedSubCmd) {
     console.log("No sub-command selected.");
-    // return;
   }
 
-  let mcapFlags = (await flagsInput()) ?? "";
+  let mcapFlags = (await showInputBox()) ?? "";
 
   // if the command requires an output file but the output flag isn't present, add it
   if (outFile) {
     if (!mcapFlags?.match(/^-o|--output$/)) {
-      await flagsInput({
+      await showInputBox({
         prompt: "output file name. ex: output.mcap",
         title: "Output File",
         ignoreFocusOut: false,
@@ -50,13 +53,9 @@ export async function commandSetup(
     }
   }
 
-  runMCAPCommand(
+  await runMCAPCommand(
     [cmd, selectedSubCmd?.label || ""],
     fsPath || [],
     [mcapFlags || ""]
   );
-  // } else {
-  // If the command does not require a sub-command, but sub-commands are found, show an error message
-
-  // }
 }

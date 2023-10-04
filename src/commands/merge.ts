@@ -1,19 +1,19 @@
 import * as vscode from "vscode";
-import {
-  commandSetup,
-  flagsInput,
-  runMCAPCommand,
-  selectMCAPFile,
-} from "../utils";
+import { showInputBox, runMCAPCommand } from "../utils";
 
+/**
+ * Registers the `mcap-cli-vscode.merge` command with VS Code, which allows the user to merge MCAP files.
+ */
 export default vscode.commands.registerCommand(
   "mcap-cli-vscode.merge",
-  async (uri: vscode.Uri) => {
-
-    let mcapFlags = (await flagsInput()) ?? "";
+  async () => {
+    /**
+     * The flags to pass to the MCAP command.
+     */
+    let mcapFlags = (await showInputBox()) ?? "";
 
     if (!mcapFlags?.match(/^-o|--output$/)) {
-      await flagsInput({
+      await showInputBox({
         prompt: "output file name. ex: output.mcap",
         title: "Output File",
         ignoreFocusOut: false,
@@ -47,6 +47,9 @@ export default vscode.commands.registerCommand(
       description: file.fsPath,
     }));
 
+    /**
+     * The selected files to merge.
+     */
     const selectedFiles = await vscode.window
       .showQuickPick(fileItems, {
         placeHolder: "Select a .mcap file",
@@ -59,6 +62,5 @@ export default vscode.commands.registerCommand(
       });
 
     await runMCAPCommand(["merge"], selectedFiles as string[], [mcapFlags]);
-    vscode.window.showInformationMessage("Success from mcap-cli merge");
   }
 );

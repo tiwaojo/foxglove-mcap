@@ -1,11 +1,10 @@
 import * as vscode from "vscode";
-import {
-  commandSetup,
-  flagsInput,
-  runMCAPCommand,
-  selectMCAPFile,
-} from "../utils";
+import { runMCAPCommand, selectMCAPFile } from "../utils";
 
+/**
+ Registers the `mcap-cli-vscode.doctor` command with VS Code, which allows the user to verify the structure of an MCAP file.
+ * @param uri The URI of the file to which the structure is checked, if specified through the explorers/context menu.
+ */
 export default vscode.commands.registerCommand(
   "mcap-cli-vscode.doctor",
   async (uri: vscode.Uri) => {
@@ -13,11 +12,10 @@ export default vscode.commands.registerCommand(
       uri && uri.fsPath !== "" ? uri.fsPath : ""
     );
     if (!filePath) {
-      vscode.window.showErrorMessage("No '.mcap' file selected or found.");
+      console.log("No '.mcap' file selected or found.");
       return;
     }
 
     await runMCAPCommand(["doctor"], [filePath], []);
-    vscode.window.showInformationMessage("Success from mcap-cli doctor");
   }
 );

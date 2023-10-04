@@ -1,11 +1,10 @@
 import * as vscode from "vscode";
-import {
-  commandSetup,
-  flagsInput,
-  runMCAPCommand,
-  selectMCAPFile,
-} from "../utils";
+import { commandSetup, selectMCAPFile } from "../utils";
 
+/**
+ * Registers a command to filter MCAP files.
+ * @param uri - The URI of the file to filter.
+ */
 export default vscode.commands.registerCommand(
   "mcap-cli-vscode.filter",
   async (uri: vscode.Uri) => {
@@ -13,15 +12,10 @@ export default vscode.commands.registerCommand(
       uri && uri.fsPath !== "" ? uri.fsPath : ""
     );
     if (!filePath) {
-      vscode.window.showErrorMessage("No file selected or found.");
+      console.log("No file selected or found.");
       return;
     }
 
     await commandSetup("filter", [], [filePath], true);
-
-    // const mcapFlags = (await flagsInput()) ?? "";
-
-    // await runMCAPCommand(["filter"], [filePath], [mcapFlags]);
-    vscode.window.showInformationMessage("Success from mcap-cli filter");
   }
 );
