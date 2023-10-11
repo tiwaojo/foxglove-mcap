@@ -21,17 +21,22 @@ Extends the MCAP CLI for use in VSCode. Visit the [MCAP](https://mcap.dev/) site
 
 - You can install the binary in your workspace and add to your `.gitignore` file.
 
+- The cli can also be made available through mcap-cli devcontainer [feature](https://github.com/tiwaojo/features)
+
 ## Features
 
 A command pallet of commands to run in addition to adding to the `explorer` context menu for the certain folders that drive the commands. Checkout out the previews below!
 
 ### Context Menus
 
-![context menu](assets/images/context-menu.png)
+#### For `.mcap` files:
+
+![context menu](assets/images/context-menu-mcap.png)
+
+#### For `.db3` files:
+
+![context menu](assets/images/context-menu-db3.png)
 <!-- https://github.com/microsoft/vscode-extension-samples/issues/873 -->
-- [x] `MCAP: Add` - Add records to an existing MCAP file
-- [x] `MCAP: Cat` - Cat the messages in an MCAP file to stdout
-- [x] `MCAP: List` - List records of an MCAP file
 ---
 ### Command Prompts
 - [x] `MCAP: Add` - Add records to an existing MCAP file
@@ -41,12 +46,12 @@ A command pallet of commands to run in addition to adding to the `explorer` cont
 - [x] `MCAP: Help` - Help about any command
 - [x] `MCAP: Doctor` - Check an MCAP file structure
 - [x] `MCAP: Get` - Get a record from an MCAP file
-- [ ] `MCAP: Compress` - Create a compressed copy of an MCAP file 🚧
-- [ ] `MCAP: Decompress` - Create an uncompressed copy of an MCAP file 🚧
-- [ ] `MCAP: Convert` - Convert a bag file to an MCAP file 🚧
-- [ ] `MCAP: Recover` - Recover data from a potentially corrupt MCAP file 🚧
-- [ ] `MCAP: Filter` - Copy some filtered MCAP data to a new file 🚧
-- [ ] `MCAP: Merge` - Merge a selection of MCAP files by record timestamp 🚧
+- [X] `MCAP: Compress` - Create a compressed copy of an MCAP file 
+- [X] `MCAP: Decompress` - Create an uncompressed copy of an MCAP file 
+- [X] `MCAP: Convert` - Convert a bag file to an MCAP file 
+- [X] `MCAP: Recover` - Recover data from a potentially corrupt MCAP file 
+- [X] `MCAP: Filter` - Copy some filtered MCAP data to a new file 
+- [X] `MCAP: Merge` - Merge a selection of MCAP files by record timestamp 
 
 ## 💻 Development
 
@@ -71,43 +76,6 @@ This extension contributes the following settings:
 * `mcap.mcapPath`: Enable/disable this extension.
 * `mcap.clearOutputBeforeCommand`: Set to `false` to clear the terminal before executing the next command.
 
-<!-- ## Known Issues
+## 📝 License
 
-Calling out known issues can help limit users opening duplicate issues against your extension. -->
-
-<!-- ## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z. -->
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+Distributed under the `MIT` License. See `LICENSE` for more information.
