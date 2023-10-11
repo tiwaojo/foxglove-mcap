@@ -4,6 +4,13 @@ All notable changes to the "mcap-cli-vscode" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.0](https://github.com/tiwaojo/foxglove-mcap/compare/v1.0.0...v1.1.0) (2023-10-11)
+
+
+### Miscellaneous Chores
+
+* release 1.1.0 ([fa11f31](https://github.com/tiwaojo/foxglove-mcap/commit/fa11f317e0aefa5a491b1f262e313e1dcfee1d37))
+
 ## 1.1.0 (2023-10-11)
 
 
