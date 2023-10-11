@@ -5,9 +5,8 @@ on:
   push:
     branches:
       - main
-  release:
-    types:
-    - created
+    tags:
+      - v*
 
 jobs:
   release:
@@ -28,18 +27,19 @@ jobs:
       with:
         version: 8
         run_install: false
-        shell: bash
-        if: runner.os == 'Linux'
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-          echo store_path=${{ env.STORE_PATH }}
-    - run: pnpm install && pnpm vsce package --no-dependencies && pnpm vsce publish -p ${{ secrets.VSCE_PAT }} --no-dependencies
+    - name: Install Dependencies        
+      run: pnpm install && pnpm vsce package --no-dependencies && pnpm vsce publish -p ${{ secrets.VSCE_PAT }} --no-dependencies
+
     - uses: google-github-actions/release-please-action@v3
       with:
         release-type: node
         package-name: mcap-cli-vscode-${{ steps.release.outputs.tag_name }}
+        default-branch: main
+        bump-minor-pre-major: true
+        versioning-strategy: always-bump-minor
+        
     - name: Publish and Upload Release Artifact
-      # if: ${{ steps.release.outputs.release_created }}
+      if: ${{ steps.release.outputs.release_created }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VSCE_PAT: ${{ secrets.VSCE_PAT }}
@@ -49,4 +49,4 @@ jobs:
         pnpm vsce package --no-dependencies
         pnpm vsce publish -p ${{ secrets.VSCE_PAT }} --no-dependencies
         echo tag_name: ${{ steps.release.outputs.tag_name }}
-        gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-${{ steps.release.outputs.tag_name }}.vsix
+        gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-*.vsix

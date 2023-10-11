@@ -2,7 +2,7 @@
   "name": "mcap-cli-vscode",
   "displayName": "mcap-cli (unofficial)",
   "description": "Eases the use of the MCAP cli in VSCode",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Tiwaloluwa Ojo"
   },
@@ -25,7 +25,8 @@
   ],
   "activationEvents": [
     "workspaceContains:**/*.mcap",
-    "workspaceContains:**/mcap"
+    "workspaceContains:**/mcap",
+    "workspaceContains:**/*.db3"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -34,7 +35,7 @@
       "properties": {
         "mcap.mcapPath": {
           "type": "string",
-          "default": "/workspaces/foxglove-mcap/mcap",
+          "default": "mcap",
           "description": "Complete functions with their parameter signature.",
           "scope": "resource"
         },
@@ -46,22 +47,87 @@
         }
       }
     },
+    "configurationDefaults": {
+      "files.associations": {
+        "*.mcap": "mcap"
+      },
+      "terminal.integrated.cwd": "${workspaceFolder}"
+    },
+    "submenus": [
+      {
+        "id": "mcap.cli",
+        "label": "MCAP CLI"       
+      },
+      {
+        "id": "mcap.cli.convert",
+        "label": "MCAP CLI"
+      }
+    ],
     "menus": {
       "explorer/context": [
         {
           "when": "resourceExtname === '.mcap'",
-          "command": "mcap-cli-vscode.info",
-          "group": "2_workspace"
+          "submenu": "mcap.cli"
         },
         {
-          "when": "resourceExtname === '.mcap'",
+          "when": "resourceExtname === '.db3'",
+          "submenu": "mcap.cli.convert"
+        }
+      ],
+      "mcap.cli": [
+        {
+          "command": "mcap-cli-vscode.add",
+          "group": "2_main@1"
+        },
+        {
           "command": "mcap-cli-vscode.cat",
-          "group": "2_workspace"
+          "group": "2_main@1"
         },
         {
-          "when": "resourceExtname === '.mcap'",
+          "command": "mcap-cli-vscode.compress",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.decompress",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.doctor",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.filter",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.get",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.help",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.info",
+          "group": "2_main@1"
+        },
+        {
           "command": "mcap-cli-vscode.list",
-          "group": "2_workspace"
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.merge",
+          "group": "2_main@1"
+        },
+        {
+          "command": "mcap-cli-vscode.recover",
+          "group": "2_main@1"
+        }
+      ],
+      "mcap.cli.convert": [
+        {
+          "command": "mcap-cli-vscode.convert",
+          "group": "2_main@1"
         }
       ]
     },
