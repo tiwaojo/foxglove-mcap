@@ -1,4 +1,4 @@
-# mcap-cli-vscode README
+# mcap-cli-vscode
 
 > This extension is **not** affiliated with Foxglove.
 
