@@ -32,6 +32,8 @@ jobs:
         version: 8
         run_install: false
     - name: Package and Publish
+      env: 
+        VSCE_PAT: ${{ secrets.VSCE_PAT }}
       run: 
         | 
         pnpm install
@@ -45,7 +47,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
         release-type: node
-        package-name: mcap-cli-vscode-1.1.0.vsix
+        package-name: mcap-cli-vscode-${{ steps.release.outputs.tag_name }}.vsix
         default-branch: main
         bump-minor-pre-major: true
         versioning-strategy: always-bump-minor
@@ -58,4 +60,6 @@ jobs:
         VSCE_PAT: ${{ secrets.VSCE_PAT }}
       run: |
         echo tag_name: ${{ steps.release.outputs.tag_name }}
-        gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-1.1.0.vsix
+        echo upload_url: ${{ steps.release.outputs.upload_url }}
+        echo outputs: ${{ steps.release.outputs }}
+        gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-${{ steps.release.outputs.tag_name }}.vsix
