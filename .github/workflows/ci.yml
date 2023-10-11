@@ -47,7 +47,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
         release-type: node
-        package-name: mcap-cli-vscode-${{ steps.release.outputs.tag_name }}.vsix
+        release-as: 1.1.0
+        package-name: mcap-cli-vscode-${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}.vsix
         default-branch: main
         bump-minor-pre-major: true
         versioning-strategy: always-bump-minor
@@ -62,4 +63,4 @@ jobs:
         echo tag_name: ${{ steps.release.outputs.tag_name }}
         echo upload_url: ${{ steps.release.outputs.upload_url }}
         echo outputs: ${{ steps.release.outputs }}
-        gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-${{ steps.release.outputs.tag_name }}.vsix
+        gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}.vsix
