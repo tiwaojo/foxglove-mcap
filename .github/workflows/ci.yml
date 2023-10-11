@@ -48,7 +48,7 @@ jobs:
       with:
         release-type: node
         release-as: 1.1.0
-        package-name: mcap-cli-vscode-${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}.vsix
+        package-name: mcap-cli-vscode
         default-branch: main
         bump-minor-pre-major: true
         versioning-strategy: always-bump-minor
@@ -63,4 +63,4 @@ jobs:
         echo tag_name: ${{ steps.release.outputs.tag_name }}
         echo upload_url: ${{ steps.release.outputs.upload_url }}
         echo outputs: ${{ steps.release.outputs }}
-        gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}.vsix
+        gh release upload ${{ steps.release.outputs.tag_name }} ./mcap-cli-vscode-${{ steps.release.outputs.tag_name }}.vsix
