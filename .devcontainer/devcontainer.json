@@ -4,6 +4,9 @@
   "name": "foxglove-mcap-dev",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/typescript-node:latest",
+  "containerEnv": {
+    "DISPLAY": ":0"
+  },
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers-contrib/features/pnpm": {
@@ -15,13 +18,19 @@
   "workspaceFolder": "/home/node/${localWorkspaceFolderBasename}",
   "workspaceMount": "source=${localWorkspaceFolder},target=/home/node/${localWorkspaceFolderBasename},type=bind",
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "pnpm i && npm i -g @vscode/vsce",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2 xvfb x11-apps",
+  "postStartCommand": "pnpm i && npm i -g @vscode/vsce",
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
-      "extensions": ["esbenp.prettier-vscode","GitHub.copilot"]
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "GitHub.copilot",
+        "ms-vscode.extension-test-runner"
+      ]
     }
   }
+  // sudo apt install libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2 xvfb x11-apps -y
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
 }

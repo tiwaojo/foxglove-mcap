@@ -214,7 +214,8 @@
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "vscode-test --coverage --coverage-output=${PWD}/coverage --disable-extensions --extensionDevelopmentPath=${PWD} --extensionTestsPath=${PWD}/out/test/suite/index --headless=true",
+    "test:runner": "npx ts-node ${PWD}/src/test/runTest.ts"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
@@ -223,6 +224,7 @@
     "@types/vscode": "^1.80.0",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
+    "@vscode/test-cli": "^0.0.6",
     "@vscode/test-electron": "^2.3.2",
     "@vscode/vsce": "^2.20.0",
     "esbuild": "^0.18.17",
