@@ -47,7 +47,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
         release-type: node
-        release-as: 1.1.0
+        release-as: 1.1.0 # https://github.com/googleapis/release-please/tree/main#how-do-i-change-the-version-number
         package-name: mcap-cli-vscode
         default-branch: main
         bump-minor-pre-major: true

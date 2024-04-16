@@ -5,9 +5,14 @@ import path = require('node:path');
 // as well as import your extension to test it
 import * as vscode from 'vscode';
 import * as mcapExt from '../../extension';
+import { beforeEach } from 'mocha';
 
 suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
+
+	beforeEach(() => {
+		vscode.window.showInformationMessage('Start test');
+	});
 
 	const extensionPath = vscode.extensions.getExtension('mcap-cli-vscode')?.extensionPath;
 	const commandsPath = path.join(extensionPath as string, 'src', 'commands');
